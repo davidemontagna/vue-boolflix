@@ -1,18 +1,24 @@
 <template>
     <main>
         <search-bar @searching="startSearch"/>
-        main
+        <movie 
+        v-for="movie in arrayMovies"
+        :key="movie.id"
+        :movie="movie"
+        />
     </main>
 </template>
 
 <script>
 import axios from 'axios';
 import SearchBar from './commons/SearchBar.vue';
+import Movie from './commons/Movie.vue'
 
 export default {
     name: 'Main',
     components: {
         SearchBar,
+        Movie
     },
 
     data(){
