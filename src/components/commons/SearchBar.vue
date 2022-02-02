@@ -1,6 +1,10 @@
 <template>
     <div>
-        <input type="text" v-model="search" >
+        <input 
+        type="text"
+        v-model="search"
+        @keyup.enter="$emit('searching', search), clearInput()"
+        >
 
         <button
         value="go-search"
