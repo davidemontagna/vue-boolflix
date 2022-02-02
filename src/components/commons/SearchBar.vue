@@ -1,10 +1,10 @@
 <template>
     <div>
-        <input type="text" v-model="search">
+        <input type="text" v-model="search" >
 
         <button
         value="go-search"
-        @click="$emit('searching', search)"
+        @click="$emit('searching', search), clearInput()"
         >        
         Search
         </button>
@@ -18,6 +18,12 @@ export default {
     data(){
         return {
             search: "",
+        }
+    },
+
+    methods:{
+        clearInput(){
+            this.search = "";
         }
     }
 }
