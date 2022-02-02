@@ -41,9 +41,9 @@ export default {
                         query: this.movieSearched
                     }
                 })
-                .then( (response) => {
-                    this.arrayMovies = response.data.results
-                    console.log(this.arrayMovies)
+                .then( (response) => {                    
+                    this.arrayMovies = response.data.results;
+                    console.log(this.arrayMovies);
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -52,7 +52,7 @@ export default {
 
         startSearch(search){
             this.movieSearched = search;
-            this.getMovie()            
+            this.getMovie();         
         }
     }
 }
