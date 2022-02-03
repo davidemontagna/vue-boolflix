@@ -2,7 +2,7 @@
     <div>
         <input 
         type="text"
-        v-model="search"
+        v-model.trim="search"
         @keyup.enter="$emit('searching', search), clearInput()"
         >
 
