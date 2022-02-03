@@ -1,5 +1,6 @@
 <template>
     <div class="card my-2 mx-2">
+        <img :src="img + TvSerie.poster_path" alt="unknown">
         <ul>
             <li>
             <span>Titolo serie tv: </span> <h4>{{TvSerie.name}}</h4> <br>
@@ -41,7 +42,12 @@ export default {
     name: 'TvSerie',
     props: {
         TvSerie: Object,
-    }    
+    },
+    data(){
+        return {
+            img: "https://image.tmdb.org/t/p/w342",
+        }
+    },   
     
 }
 </script>
@@ -54,7 +60,7 @@ export default {
 }
 
 .card{
-    height: 350px;
+    min-height: 500px;
     width: 230px;
     padding: 10px;
     border: 1px solid #000;

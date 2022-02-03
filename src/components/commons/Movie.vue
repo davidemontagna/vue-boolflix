@@ -1,5 +1,6 @@
 <template>
     <div class="card my-2 mx-2">
+        <img :src="img + movie.poster_path" alt="unknown">
         <ul>
             <li>
             <span>Titolo film: </span> <h4>{{movie.title}}</h4> <br>
@@ -41,7 +42,13 @@ export default {
     name: 'Movie',
     props: {
         movie: Object,
-    }    
+    },
+    data(){
+        return {
+            img: "https://image.tmdb.org/t/p/w342",
+        }
+    },
+     
     
 }
 </script>
@@ -54,7 +61,7 @@ export default {
 }
 
 .card{
-    height: 350px;
+    min-height: 500px;    
     width: 230px;
     padding: 10px;
     border: 1px solid #000;
