@@ -1,11 +1,11 @@
 <template>
-    <main>
-        <!--<search-bar @searching="startSearch"/>-->
-
+    <main>        
         <div class="container" :class="getArraySearched">
             <div class="row">
                 
-                <div v-show="arrayMovies != ''" class="col-12 col-sm-6 col-lg-3 w-100 flex-column justify-content-start flex-wrap">
+                <div v-show="arrayMovies != ''"
+                class="col-12 col-sm-6 col-lg-3 w-100 flex-column justify-content-start flex-wrap">
+                    
                     <div class="justify-content-start">
                         <h2>Lista Film:</h2>
                     </div>
@@ -15,11 +15,14 @@
                         :key="movie.id"
                         :movie="movie"
                         />
+                    
                     </div>                   
                 </div>
 
                 
-                <div v-show="arrayMovies != ''" class="col-12 col-sm-6 col-lg-3 my-3 w-100 flex-column justify-content-start flex-wrap">
+                <div v-show="arrayMovies != ''"
+                class="col-12 col-sm-6 col-lg-3 my-3 w-100 flex-column justify-content-start flex-wrap">
+                    
                     <div class="justify-content-start">
                         <h2>Lista Serie Tv:</h2>
                     </div>
@@ -28,8 +31,9 @@
                         v-for="TvSerie in arrayTvSeries"
                         :key="TvSerie.id"
                         :TvSerie="TvSerie"
-                        />
+                        />                    
                     </div>
+
                 </div>
             </div>
         </div>
@@ -39,14 +43,12 @@
 
 <script>
 import axios from 'axios';
-//import SearchBar from './commons/SearchBar.vue';
 import Movie from './commons/Movie.vue';
 import TvSerie from './commons/TvSerie.vue';
 
 export default {
     name: 'Main',
-    components: {
-        //SearchBar,
+    components: {        
         Movie,
         TvSerie
     },
@@ -58,21 +60,22 @@ export default {
         return {
             apiUrlMovie: "https://api.themoviedb.org/3/search/movie/",
             apiUrlTvSeries: "https://api.themoviedb.org/3/search/tv",
-            api: "73c18d57cad03bbd2fde6c0db5157c10",
+            myApi: "73c18d57cad03bbd2fde6c0db5157c10",
             arrayMovies: [],
             arrayTvSeries: [],
             movieSearched: "",
             tvSerieSearched: ""
         }
-    },
-
-    
+    },    
 
     computed:{
         getArraySearched(){
-            this.getMovie()
-            this.getTvSeries()
-            return this.searchValue;
+            if(this.searchValue != ""){
+                this.getMovie()
+                this.getTvSeries()
+                return this.searchValue;
+            }
+            return "";
         }
     },
 
@@ -82,7 +85,7 @@ export default {
             axios
                 .get(this.apiUrlMovie, {
                     params: {
-                        api_key: this.api,
+                        api_key: this.myApi,
                         query: this.searchValue
                     }
                 })
@@ -99,7 +102,7 @@ export default {
             axios
                 .get(this.apiUrlTvSeries, {
                     params: {
-                        api_key: this.api,
+                        api_key: this.myApi,
                         query: this.searchValue
                     }
                 })
@@ -110,16 +113,9 @@ export default {
                 .catch(function (error) {
                     console.log(error);
                 })
-        },
+        }        
 
         
-
-        /*startSearch(search) {
-            this.tvSerieSearched = search;
-            this.movieSearched = search;
-            this.getMovie();
-            this.getTvSeries();     
-        }*/
     }
 }
 </script>
