@@ -1,5 +1,6 @@
 <template>
     <div>
+        <!--Input per la ricerca del film e serie tv, con l'emit lo passo al padre(Header)-->
         <input
         class="dm-src-bar" 
         type="text"
@@ -28,6 +29,8 @@ export default {
     },
 
     methods:{
+        
+        //Funzione per ripulire l'input text una volta premuto invio o al click sul bottone
         clearInput(){
             this.search = "";
         }

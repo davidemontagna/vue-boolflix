@@ -7,7 +7,9 @@
                         Boolflix
                     </h2>
 
-                    <search-bar @searching="functionTest"/>
+                    <!--Inserirsco la searchbar e ne prendo il valore passato e mi preparo a passarlo
+                    con una funzione al padre(App.vue)-->
+                    <search-bar @searching="pastValue"/>
 
                 </div>
             </div>
@@ -25,7 +27,8 @@ export default {
         SearchBar
     },
     methods:{
-        functionTest(research) {
+        //funzione per passare con l'emit il valore ricevuto
+        pastValue(research) {
             this.$emit('srcInput', research)
         }
     }

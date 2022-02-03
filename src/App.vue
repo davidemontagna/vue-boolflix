@@ -1,6 +1,9 @@
 <template>
   <div id="app"> 
-    <Header @srcInput="functionTest2"/>   
+    <!--Dall'header recupero il valore passato con srcInput e con la funzione
+    valueSearched inserisco il suo valore in goSearch che verrà passato al figlio (Main)
+    come props-->
+    <Header @srcInput="valueSearched"/>   
     <Main :searchValue="goSearch" />
   </div>
 </template>
@@ -24,7 +27,8 @@ export default {
   },
 
   methods:{
-    functionTest2(research2) {
+    //funzione per inserire il valore passato, dentro la variabile goSearch
+    valueSearched(research2) {
       this.goSearch = research2
     }
   }

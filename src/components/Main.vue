@@ -52,6 +52,8 @@ export default {
         Movie,
         TvSerie
     },
+
+    //Recupero il valore passato dal padre (App.vue) e gli do String come type
     props:{
         searchValue: String,
     },
@@ -63,11 +65,11 @@ export default {
             myApi: "73c18d57cad03bbd2fde6c0db5157c10",
             arrayMovies: [],
             arrayTvSeries: [],
-            movieSearched: "",
-            tvSerieSearched: ""
         }
     },    
 
+    //al cambio di valore nell'imput getArraySearched esegue le funzioni getMovie e getTvSeries
+    //e restituisce il valore da ricercare
     computed:{
         getArraySearched(){
             if(this.searchValue != ""){
@@ -80,6 +82,7 @@ export default {
     },
 
     methods: {
+        //axios per generare l'API da cui prendere il mio array di oggetti (in questo caso film)
         getMovie() {
             
             axios
@@ -98,6 +101,7 @@ export default {
                 })
         },
 
+        //axios per generare l'API da cui prendere il mio array di oggetti (in questo caso serie tv)
         getTvSeries() {
             axios
                 .get(this.apiUrlTvSeries, {
