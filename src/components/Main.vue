@@ -1,27 +1,35 @@
 <template>
     <main>
-        <search-bar @searching="startSearch"/>
-        <div class="container">
+        <!--<search-bar @searching="startSearch"/>-->
+
+        <div class="container" :class="getArraySearched">
             <div class="row">
-                <h2>Lista Film:</h2>
-                <div class="col-12 col-sm-6 col-lg-3 w-100 d-flex justify-content-start flex-wrap">
-                    
-                    <movie 
-                    v-for="movie in arrayMovies"
-                    :key="movie.id"
-                    :movie="movie"
-                    />
-                    
+                
+                <div v-show="arrayMovies != ''" class="col-12 col-sm-6 col-lg-3 w-100 flex-column justify-content-start flex-wrap">
+                    <div class="justify-content-start">
+                        <h2>Lista Film:</h2>
+                    </div>
+                    <div class="d-flex justify-content-start flex-wrap">
+                        <movie 
+                        v-for="movie in arrayMovies"
+                        :key="movie.id"
+                        :movie="movie"
+                        />
+                    </div>                   
                 </div>
-                <h2 class="mt-5">Lista Serie TV:</h2>
-                <div class="col-12 col-sm-6 col-lg-3 my-3 w-100 d-flex justify-content-start flex-wrap">
-                    
-                    <tv-serie 
-                    v-for="TvSerie in arrayTvSeries"
-                    :key="TvSerie.id"
-                    :TvSerie="TvSerie"
-                    />
-                    
+
+                
+                <div v-show="arrayMovies != ''" class="col-12 col-sm-6 col-lg-3 my-3 w-100 flex-column justify-content-start flex-wrap">
+                    <div class="justify-content-start">
+                        <h2>Lista Serie Tv:</h2>
+                    </div>
+                    <div class="d-flex justify-content-start flex-wrap">
+                        <tv-serie 
+                        v-for="TvSerie in arrayTvSeries"
+                        :key="TvSerie.id"
+                        :TvSerie="TvSerie"
+                        />
+                    </div>
                 </div>
             </div>
         </div>
@@ -31,16 +39,19 @@
 
 <script>
 import axios from 'axios';
-import SearchBar from './commons/SearchBar.vue';
+//import SearchBar from './commons/SearchBar.vue';
 import Movie from './commons/Movie.vue';
 import TvSerie from './commons/TvSerie.vue';
 
 export default {
     name: 'Main',
     components: {
-        SearchBar,
+        //SearchBar,
         Movie,
         TvSerie
+    },
+    props:{
+        searchValue: String,
     },
 
     data(){
@@ -55,13 +66,24 @@ export default {
         }
     },
 
+    
+
+    computed:{
+        getArraySearched(){
+            this.getMovie()
+            this.getTvSeries()
+            return this.searchValue;
+        }
+    },
+
     methods: {
         getMovie() {
+            
             axios
                 .get(this.apiUrlMovie, {
                     params: {
                         api_key: this.api,
-                        query: this.movieSearched
+                        query: this.searchValue
                     }
                 })
                 .then( (response) => {                    
@@ -78,7 +100,7 @@ export default {
                 .get(this.apiUrlTvSeries, {
                     params: {
                         api_key: this.api,
-                        query: this.tvSerieSearched
+                        query: this.searchValue
                     }
                 })
                 .then( (response) => {                    
@@ -92,12 +114,12 @@ export default {
 
         
 
-        startSearch(search){
+        /*startSearch(search) {
             this.tvSerieSearched = search;
             this.movieSearched = search;
             this.getMovie();
             this.getTvSeries();     
-        }
+        }*/
     }
 }
 </script>
