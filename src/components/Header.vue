@@ -46,7 +46,7 @@ export default {
 .dm-logo{
     margin: 0;
     font-weight: bold;
-    font-size: 45px;
+    font-size: 50px;
     color: $txt-logo-color;
     text-transform: uppercase;
 }

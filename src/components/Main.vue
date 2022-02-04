@@ -4,10 +4,10 @@
             <div class="row">
                 
                 <div v-show="arrayMovies != ''"
-                class="col-12 col-sm-6 col-lg-3 w-100 flex-column justify-content-start flex-wrap">
+                class="col-12 col-sm-6 col-lg-3 mt-4 w-100 flex-column justify-content-start flex-wrap">
                     
                     <div class="justify-content-start">
-                        <h2>Lista Film:</h2>
+                        <h1 class="dm-list-txt">Lista Film:</h1>
                     </div>
                     <div class="d-flex justify-content-start flex-wrap">
                         <movie 
@@ -24,7 +24,7 @@
                 class="col-12 col-sm-6 col-lg-3 my-3 w-100 flex-column justify-content-start flex-wrap">
                     
                     <div class="justify-content-start">
-                        <h2>Lista Serie Tv:</h2>
+                        <h1 class="dm-list-txt">Lista Serie Tv:</h1>
                     </div>
                     <div class="d-flex justify-content-start flex-wrap">
                         <tv-serie 
@@ -128,6 +128,12 @@ export default {
 @import '../assets/style/global.scss';
 
 main{
+    background-color: $bg-main;
     width: 100vw;
+    min-height: calc(100vh - 74px);
+}
+
+.dm-list-txt{
+    color: $txt-color-light;
 }
 </style>
