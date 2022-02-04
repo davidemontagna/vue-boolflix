@@ -7,28 +7,9 @@
             <span>Titolo originale: </span>{{TvSerie.original_name}} <br>
             <span>Lingua originale: </span>
                 <img 
-                v-if="TvSerie.original_language == 'en'"
-                src="../../assets/img/flags/usa-flag.png"
-                alt="en"
                 class="flag-lang"
-                >
-                <img 
-                v-else-if="TvSerie.original_language == 'it'"
-                src="../../assets/img/flags/ita-flag.png"
-                alt="it"
-                class="flag-lang"
-                >
-                <img 
-                v-else-if="TvSerie.original_language == 'es'"
-                src="../../assets/img/flags/es-flag.jpg"
-                alt="es"
-                class="flag-lang"
-                >           
-                <img 
-                v-else
-                src="../../assets/img/flags/horde-flag.png"
-                alt="unknown"
-                class="flag-lang"
+                :src="require(`../../assets/img/flags/${flag(TvSerie.original_language)}.png`)"
+                :alt="TvSerie.original_language"
                 ><br>                
                 <span>Media voto: </span>{{TvSerie.vote_average}}
             </li> 
@@ -46,8 +27,18 @@ export default {
     data(){
         return {
             img: "https://image.tmdb.org/t/p/w342",
+            langArray: ['en', 'it', 'es'],
         }
-    },   
+    }, 
+    methods:{
+        flag(lang){
+            let urlFlag = "horde";
+            if(this.langArray.includes(lang)){
+                urlFlag = lang;
+            }
+            return urlFlag
+        },
+    }  
     
 }
 </script>

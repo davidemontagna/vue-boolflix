@@ -6,6 +6,7 @@
         type="text"
         v-model.trim="search"
         @keyup.enter="$emit('searching', search), clearInput()"
+        placeholder="Title"
         >
 
         <button

@@ -1,36 +1,23 @@
 <template>
     <div class="card my-2 mx-2">
         <img :src="img + movie.poster_path" alt="unknown">
-        <ul>
+        <ul class="mt-2">
             <li>
             <span>Titolo film: </span> <h4>{{movie.title}}</h4> <br>
             <span>Titolo originale: </span>{{movie.original_title}} <br>
             <span>Lingua originale: </span>
                 <img 
-                v-if="movie.original_language == 'en'"
-                src="../../assets/img/flags/usa-flag.png"
-                alt="en"
                 class="flag-lang"
+                :src="require(`../../assets/img/flags/${flag(movie.original_language)}.png`)" 
+                :alt="movie.original_language"> 
+                <br>                
+                <span>Media voto: </span>
+                <span :class="starVote()"
+                v-for="index in stars"
+                :key="index"
                 >
-                <img 
-                v-else-if="movie.original_language == 'it'"
-                src="../../assets/img/flags/ita-flag.png"
-                alt="it"
-                class="flag-lang"
-                >
-                <img 
-                v-else-if="movie.original_language == 'es'"
-                src="../../assets/img/flags/es-flag.jpg"
-                alt="es"
-                class="flag-lang"
-                >           
-                <img 
-                v-else
-                src="../../assets/img/flags/horde-flag.png"
-                alt="unknown"
-                class="flag-lang"
-                ><br>                
-                <span>Media voto: </span>{{movie.vote_average}}
+                {{index}}
+                </span>{{movie.vote_average}}
             </li> 
         </ul>      
     </div>
@@ -46,8 +33,25 @@ export default {
     data(){
         return {
             img: "https://image.tmdb.org/t/p/w342",
+            langArray: ['en', 'it', 'es'],
+            stars: this.starVote(),
+
         }
     },
+    methods: {
+        flag(lang){
+            let urlFlag = "horde";
+            if(this.langArray.includes(lang)){
+                urlFlag = lang;
+            }
+            return urlFlag
+        },
+
+        starVote(){            
+            let starVote = Math.ceil(this.movie.vote_average / 2);            
+            console.log(starVote)
+        }
+    }
      
     
 }
