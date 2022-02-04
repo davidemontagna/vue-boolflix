@@ -11,13 +11,15 @@
                 :src="require(`../../assets/img/flags/${flag(movie.original_language)}.png`)" 
                 :alt="movie.original_language"> 
                 <br>                
-                <span>Media voto: </span>
-                <span :class="starVote()"
-                v-for="index in stars"
-                :key="index"
-                >
-                {{index}}
-                </span>{{movie.vote_average}}
+                <span>Media voto: 
+                    <span                     
+                    v-for="(star, index) in starVote(movie.vote_average)"
+                    :key="index"
+                    >
+                    <img class="stars" src="../../assets/img/star/star.png" alt="">
+                    </span> 
+                </span>
+                
             </li> 
         </ul>      
     </div>
@@ -34,7 +36,7 @@ export default {
         return {
             img: "https://image.tmdb.org/t/p/w342",
             langArray: ['en', 'it', 'es'],
-            stars: this.starVote(),
+            
 
         }
     },
@@ -47,10 +49,14 @@ export default {
             return urlFlag
         },
 
-        starVote(){            
-            let starVote = Math.ceil(this.movie.vote_average / 2);            
-            console.log(starVote)
-        }
+        starVote(vote){            
+            vote = Math.ceil(this.movie.vote_average / 2);
+                        
+            
+            return vote
+        },
+
+        
     }
      
     
@@ -85,5 +91,9 @@ export default {
 
         
     }
+}
+
+.stars{
+    height: 15px;
 }
 </style>
