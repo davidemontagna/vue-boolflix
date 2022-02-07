@@ -9,7 +9,7 @@
                     <div class="justify-content-start">
                         <h1 class="dm-list-txt">Lista Film:</h1>
                     </div>
-                    <div class="d-flex justify-content-start flex-wrap">
+                    <div class="d-flex justify-content-evenly flex-wrap">
                         <movie 
                         v-for="movie in arrayMovies"
                         :key="movie.id"
