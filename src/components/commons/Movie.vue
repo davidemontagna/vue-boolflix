@@ -51,16 +51,11 @@ export default {
         },
 
         starVote(vote){            
-            vote = Math.ceil(this.movie.vote_average / 2);
-                        
-            
+            vote = Math.ceil(this.movie.vote_average / 2);                       
             return vote
         },
-
         
-    }
-     
-    
+    }    
 }
 </script>
 
